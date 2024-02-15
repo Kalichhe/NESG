@@ -1,6 +1,5 @@
-from pickle import TRUE
-from xmlrpc.client import TRANSPORT_ERROR
-import pygame, random
+from pickle import TRUE  # This is activated, when the game is initialized
+import pygame
 from player import Player
 from meteor import Meteor
 from drawShieldBar import draw_shield_bar
@@ -8,6 +7,7 @@ from explosion import Explosion
 from drawText import draw_text
 from end import End
 from showGoScreen import GoScreen
+from win import Win
 
 WIDTH = 1280
 HEIGHT = 720
@@ -20,11 +20,15 @@ GREEN = (0, 255, 0)
 GoScreen = GoScreen()
 
 
-pygame.init() # Inicializa pygame
-pygame.mixer.init() # Inicializa el sonido para el juego
-screen = pygame.display.set_mode((WIDTH, HEIGHT)) # Creamos una ventana donde esta nuestro juego  
-pygame.display.set_caption("Navecita Espacial Super Galáctica") # Le colocamos un titulo al juego 
-clock = pygame.time.Clock() # Creamos un reloj para controlar los fps
+pygame.init()  # Inicializa pygame
+pygame.mixer.init()  # Inicializa el sonido para el juego
+screen = pygame.display.set_mode(
+    (WIDTH, HEIGHT)
+)  # Creamos una ventana donde esta nuestro juego
+pygame.display.set_caption(
+    "Navecita Espacial Super Galáctica"
+)  # Le colocamos un titulo al juego
+clock = pygame.time.Clock()  # Creamos un reloj para controlar los fps
 
 
 # Wallpapers
@@ -46,20 +50,19 @@ game_over = True
 running = True
 
 while running:
-    
+
     if game_over:
 
         pygame.mixer.music.load("../sounds/music.ogg")
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(loops=-1)
-        
+
         GoScreen.show_go_screen()
-        
-        game_over = False 
+
+        game_over = False
         pygame.mixer.music.load("../sounds/fondo.mp3")
         pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play(loops=-1)
-
 
         all_sprites = pygame.sprite.Group()
         meteor_list = pygame.sprite.Group()
@@ -73,32 +76,36 @@ while running:
             meteor_list.add(meteor)
 
         score = 0
-        
+
     clock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                player.shoot()        
-    
+                player.shoot()
+
     all_sprites.update()
 
-    # Colisiones
+    # Collisions
     hits = pygame.sprite.groupcollide(meteor_list, bullets, True, True)
     for hit in hits:
-         score += 1
-         explosion_sound.play()
-         explosion = Explosion(hit.rect.center)
-         all_sprites.add(explosion)
-         meteor = Meteor()
-         all_sprites.add(meteor)
-         meteor_list.add(meteor)
-         if score % 20 == 0:
-             player.shield += 1
-             victory.play()
-             if player.shield > 5:
-                 player.shield = 5
+        score += 1
+        explosion_sound.play()
+        explosion = Explosion(hit.rect.center)
+        all_sprites.add(explosion)
+        meteor = Meteor()
+        all_sprites.add(meteor)
+        meteor_list.add(meteor)
+    
+        if score == 100:
+            game_over = True
+            Win()
+        elif score % 20 == 0:
+            player.shield += 1
+            victory.play()
+            if player.shield > 5:
+                player.shield = 5            
 
     hits = pygame.sprite.spritecollide(player, meteor_list, True)
     for hit in hits:
@@ -115,13 +122,13 @@ while running:
 
     all_sprites.draw(screen)
 
-    # Marcador 
-    draw_text(screen, str(score  ), 25, WIDTH // 2, 10)
+    # Marcador
+    draw_text(screen, str(score), 25, WIDTH // 2, 10)
 
     # Vida
 
     draw_shield_bar(screen, 5, 5, player.shield)
 
     pygame.display.flip()
-    
+
 pygame.quit()
