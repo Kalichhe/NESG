@@ -8,6 +8,7 @@ from drawText import draw_text
 from end import End
 from showGoScreen import GoScreen
 from win import Win
+from pygame.locals import KEYDOWN, K_ESCAPE, QUIT
 
 WIDTH = 1280
 HEIGHT = 720
@@ -50,7 +51,7 @@ game_over = True
 running = True
 
 while running:
-
+    
     if game_over:
 
         pygame.mixer.music.load("../sounds/music.ogg")
@@ -97,7 +98,7 @@ while running:
         meteor = Meteor()
         all_sprites.add(meteor)
         meteor_list.add(meteor)
-    
+
         if score == 100:
             game_over = True
             Win()
@@ -105,7 +106,7 @@ while running:
             player.shield += 1
             victory.play()
             if player.shield > 5:
-                player.shield = 5            
+                player.shield = 5
 
     hits = pygame.sprite.spritecollide(player, meteor_list, True)
     for hit in hits:

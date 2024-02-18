@@ -9,6 +9,9 @@ class GoScreen:
     def show_go_screen(self):
         from drawText import draw_text
         from main import screen, clock, principal, TRUE 
+        
+        input_text = ""
+        font = pygame.font.Font(None, 32)
 
         screen.blit(principal, [0,0])
         draw_text(screen, "Navecita Espacial Super Galáctica", 70, self.WIDTH // 2, self.HEIGHT // 8)
@@ -26,3 +29,6 @@ class GoScreen:
                     pygame.quit()
                 if event.type == pygame.KEYUP:
                     waiting = False
+            pygame.display.flip()
+
+
