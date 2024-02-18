@@ -11,7 +11,7 @@ GREEN = (0, 255, 0)
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load("../images/laserBlue06.png")
+        self.image = pygame.image.load("../images/laser/laserBlue06.png")
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.rect.y = y

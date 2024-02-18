@@ -16,7 +16,7 @@ class Explosion(pygame.sprite.Sprite):
     def explosion_anim(self):
         explosion_anims = []
         for i in range(9):
-            file = "../images/regularExplosion0{}.png".format(i)
+            file = "../images/explosions/regularExplosion0{}.png".format(i)
             img = pygame.image.load(file).convert()
             img.set_colorkey(BLACK)
             img_scale = pygame.transform.scale(img,(70,70))

@@ -21,16 +21,16 @@ class Meteor(pygame.sprite.Sprite):
         
     def load_images(self):
         self.meteor_images = []
-        meteor_list = ["../images/meteorBrown_big1.png",
-                        "../images/meteorBrown_big2.png",
-                        "../images/meteorBrown_big3.png",
-                        "../images/meteorBrown_big4.png",
-                        "../images/meteorBrown_med1.png",
-                        "../images/meteorBrown_med3.png",
-                        "../images/meteorBrown_small1.png",
-                        "../images/meteorBrown_small2.png",
-                        "../images/meteorBrown_tiny1.png",
-                        "../images/meteorBrown_tiny2.png"
+        meteor_list = ["../images/meteors/meteorBrown_big1.png",
+                        "../images/meteors/meteorBrown_big2.png",
+                        "../images/meteors/meteorBrown_big3.png",
+                        "../images/meteors/meteorBrown_big4.png",
+                        "../images/meteors/meteorBrown_med1.png",
+                        "../images/meteors/meteorBrown_med3.png",
+                        "../images/meteors/meteorBrown_small1.png",
+                        "../images/meteors/meteorBrown_small2.png",
+                        "../images/meteors/meteorBrown_tiny1.png",
+                        "../images/meteors/meteorBrown_tiny2.png"
                         ]
         for img in meteor_list:
             self.meteor_images.append(pygame.image.load(img).convert())

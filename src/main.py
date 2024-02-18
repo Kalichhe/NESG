@@ -33,10 +33,10 @@ clock = pygame.time.Clock()  # Creamos un reloj para controlar los fps
 
 
 # Wallpapers
-background = pygame.image.load("../images/background.jpg").convert()
-principal = pygame.image.load("../images/principal.jpg").convert()
-fin = pygame.image.load("../images/fin.jpg").convert()
-next_level = pygame.image.load("../images/next_level.jpg").convert()
+background = pygame.image.load("../images/images/background.jpg").convert()
+principal = pygame.image.load("../images/images/principal.jpg").convert()
+fin = pygame.image.load("../images/images/fin.jpg").convert()
+next_level = pygame.image.load("../images/images/next_level.jpg").convert()
 
 # Load sounds
 laser_sound = pygame.mixer.Sound("../sounds/sfx_laser1.ogg")
